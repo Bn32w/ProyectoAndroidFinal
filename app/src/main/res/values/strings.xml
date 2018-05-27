@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">ProyectoFinal</string>
+    <string name="todo">Todo</string>
+    <string name="escuelas">Escuelas</string>
+    <string name="otros">Otros</string>
+
+    <string name="Barcelona">Barcelona</string>
+    <string name="Girona">Girona</string>
+    <string name="Lleida">Lleida</string>
+    <string name="Tarragona">Tarragona</string>
+
+    <string name="infantil">Infantil</string>
+    <string name="primaria">Primaria</string>
+    <string name="eso">ESO</string>
+    <string name="bachillerato">Bachillerato</string>
+    <string name="fp">Formacion profecional</string>
+    <string name="universidad">Universidad</string>
+    <string name="descripcion">Descripcion</string>
+
+    <string-array name="ciudades">
+        <item>@string/Barcelona</item>
+        <item>@string/Girona</item>
+        <item>@string/Lleida</item>
+        <item>@string/Tarragona</item>
+    </string-array>
+</resources>
