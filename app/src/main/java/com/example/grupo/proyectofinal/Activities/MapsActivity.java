@@ -61,17 +61,17 @@ public class MapsActivity extends AppCompatActivity implements MapAdapter.IntUpd
                         name.setText(location.getName());
                         address.setText(location.getAddress());
                         break;
+                    case BottomSheetBehavior.STATE_EXPANDED:
+                        Intent intent = new Intent(MapsActivity.this,DetallesActivity.class);
+                        intent.putExtra(MainActivity.SELECTED_SCHOOL_TAG,R.string.todo);
+                        intent.putExtra(MainActivity.SELECTED_SCHOOL_POSITION,selectedPosition);
+                        MapsActivity.this.setIntent(intent);
+                        break;
                 }
             }
 
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-                if(slideOffset>=0.5){
-                    Intent intent = new Intent(MapsActivity.this,DetallesActivity.class);
-                    intent.putExtra(MainActivity.SELECTED_SCHOOL_TAG,R.string.todo);
-                    intent.putExtra(MainActivity.SELECTED_SCHOOL_POSITION,selectedPosition);
-                    MapsActivity.this.setIntent(intent);
-                }
             }
         });
     }
