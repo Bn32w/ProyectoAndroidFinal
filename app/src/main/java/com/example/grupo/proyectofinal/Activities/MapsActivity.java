@@ -65,7 +65,7 @@ public class MapsActivity extends AppCompatActivity implements MapAdapter.IntUpd
                         Intent intent = new Intent(MapsActivity.this,DetallesActivity.class);
                         intent.putExtra(MainActivity.SELECTED_SCHOOL_TAG,R.string.todo);
                         intent.putExtra(MainActivity.SELECTED_SCHOOL_POSITION,selectedPosition);
-                        MapsActivity.this.setIntent(intent);
+                        MapsActivity.this.startActivity(intent);
                         break;
                 }
             }
