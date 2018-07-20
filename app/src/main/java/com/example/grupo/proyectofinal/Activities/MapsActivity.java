@@ -24,18 +24,23 @@ import com.google.android.gms.maps.SupportMapFragment;
 
 import org.w3c.dom.Text;
 
+import java.util.Map;
+
 
 public class MapsActivity extends AppCompatActivity implements MapAdapter.IntUpdater{
 
     private BottomSheetBehavior sheetBehavior;
     private int selectedPosition;
     private SalleLocation location;
+    private TextView name,address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
+        name=null;
+        address=null;
         Toolbar toolbar = findViewById(R.id.map_toolbar);
         setSupportActionBar(toolbar);
 
@@ -58,6 +63,8 @@ public class MapsActivity extends AppCompatActivity implements MapAdapter.IntUpd
                     case BottomSheetBehavior.STATE_COLLAPSED:
                         TextView name = bottomSheet.findViewById(R.id.map_fragment_descriptor_name);
                         TextView address = bottomSheet.findViewById(R.id.map_fragment_descriptor_address);
+                        MapsActivity.this.name=name;
+                        MapsActivity.this.address=address;
                         name.setText(location.getName());
                         address.setText(location.getAddress());
                         break;
@@ -65,6 +72,7 @@ public class MapsActivity extends AppCompatActivity implements MapAdapter.IntUpd
                         Intent intent = new Intent(MapsActivity.this,DetallesActivity.class);
                         intent.putExtra(MainActivity.SELECTED_SCHOOL_TAG,R.string.todo);
                         intent.putExtra(MainActivity.SELECTED_SCHOOL_POSITION,selectedPosition);
+                        MapsActivity.this.sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                         MapsActivity.this.startActivity(intent);
                         break;
                 }
@@ -98,6 +106,10 @@ public class MapsActivity extends AppCompatActivity implements MapAdapter.IntUpd
         this.selectedPosition = selectedPosition;
         this.location = location;
 
+        if(name!=null&&address!=null){
+            name.setText(location.getName());
+            address.setText(location.getAddress());
+        }
         sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         Log.d(MapsActivity.class.getCanonicalName(),location.getName());
     }
