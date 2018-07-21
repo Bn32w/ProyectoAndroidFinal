@@ -22,7 +22,8 @@
             android:value="AIzaSyAyHPyPEsO01mSvJ1mDbCRky-YvgoJ127o" />
 
         <activity android:name=".Activities.DetallesActivity" />
-        <activity android:name=".Activities.MapsActivity"></activity>
+        <activity android:name=".Activities.MapsActivity" />
+        <activity android:name=".Activities.LoginActivity"></activity>
     </application>
 
 </manifest>
