@@ -30,7 +30,7 @@
         android:layout_gravity="end|center_vertical"
         android:clickable="true"
         android:focusable="true"
-        app:backgroundTint="@color/colorAccent"
+        app:backgroundTint="@android:color/holo_blue_dark"
         app:srcCompat="@drawable/ic_map_icon" />
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"

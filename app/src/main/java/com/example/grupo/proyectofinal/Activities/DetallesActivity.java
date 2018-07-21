@@ -1,5 +1,7 @@
 package com.example.grupo.proyectofinal.Activities;
 
+import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -12,12 +14,13 @@ import com.example.grupo.proyectofinal.Model.SalleLocation;
 import com.example.grupo.proyectofinal.Model.SalleLocationManager;
 import com.example.grupo.proyectofinal.R;
 
-public class DetallesActivity extends AppCompatActivity {
+public class DetallesActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView name;
     private TextView address;
     private TextView[] type;
     private TextView description;
+    private int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,8 @@ public class DetallesActivity extends AppCompatActivity {
         type[5] = findViewById(R.id.activity_detalles_universidad);
         description = findViewById(R.id.activity_detalles_descripcion);
         Toolbar toolbar = findViewById(R.id.activity_detalles_toolbar);
+        FloatingActionButton button = findViewById(R.id.activity_detalles_FAB);
+        button.setOnClickListener(this);
         setSupportActionBar(toolbar);
     }
 
@@ -48,7 +53,7 @@ public class DetallesActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         int tag = getIntent().getIntExtra(MainActivity.SELECTED_SCHOOL_TAG,0);
-        int position = getIntent().getIntExtra(MainActivity.SELECTED_SCHOOL_POSITION,0);
+        position = getIntent().getIntExtra(MainActivity.SELECTED_SCHOOL_POSITION,0);
         SalleLocation location = SalleLocationManager.getInstance().getLocations(tag).get(position);
         if(location==null){
             return;
@@ -60,5 +65,13 @@ public class DetallesActivity extends AppCompatActivity {
             type[i].setVisibility(location.getType()[i]? View.VISIBLE:View.GONE);
         }
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(this,MapsActivity.class);
+        intent.putExtra(MainActivity.SELECTED_SCHOOL_TAG,R.string.todo);
+        intent.putExtra(MainActivity.SELECTED_SCHOOL_POSITION,position);
+        startActivity(intent);
     }
 }

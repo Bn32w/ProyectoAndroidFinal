@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -27,31 +29,36 @@ import org.w3c.dom.Text;
 import java.util.Map;
 
 
-public class MapsActivity extends AppCompatActivity implements MapAdapter.IntUpdater{
+public class MapsActivity extends AppCompatActivity implements MapAdapter.IntUpdater, AdapterView.OnItemSelectedListener {
 
     private BottomSheetBehavior sheetBehavior;
     private int selectedPosition;
-    private SalleLocation location;
-    private TextView name,address;
+    private SalleLocation location=null;
+    private static TextView name,address;
+    private MapAdapter mapReadyCallback;
+    private int locationState;
+    private Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
+        locationState = R.string.todo;
         name=null;
         address=null;
         Toolbar toolbar = findViewById(R.id.map_toolbar);
         setSupportActionBar(toolbar);
 
-        SupportMapFragment mapFragment = SupportMapFragment.newInstance();
-        FragmentManager manager = getSupportFragmentManager();
-        manager.beginTransaction().add(R.id.map_fragment,mapFragment).commit();
-        mapFragment.getMapAsync(new MapAdapter(SalleLocationManager.getInstance().getLocations(R.string.todo),this));
-        Spinner spinner = findViewById(R.id.map_spinner);
+        SupportMapFragment mapFragment = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map);
+        mapReadyCallback = new MapAdapter(this,locationState);
+        mapFragment.getMapAsync(mapReadyCallback);
+
+        spinner = findViewById(R.id.map_spinner);
         String[] data = {getString(R.string.todo),getString(R.string.escuelas),getString(R.string.otros)};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,data);
         spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
 
         sheetBehavior = BottomSheetBehavior.from(findViewById(R.id.map_bottom_sheet));
         sheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
@@ -85,6 +92,16 @@ public class MapsActivity extends AppCompatActivity implements MapAdapter.IntUpd
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        Intent intent = getIntent();
+        if(intent.hasExtra(MainActivity.SELECTED_SCHOOL_POSITION)){
+            mapReadyCallback.clickMarker(intent.getIntExtra(MainActivity.SELECTED_SCHOOL_POSITION,0));
+        }
+    }
+
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.map_activity_menu,menu);
@@ -114,4 +131,25 @@ public class MapsActivity extends AppCompatActivity implements MapAdapter.IntUpd
         Log.d(MapsActivity.class.getCanonicalName(),location.getName());
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        mapReadyCallback.changeTargets(getSelectedTag(spinner.getSelectedItem().toString()));
+        sheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+    }
+
+    private int getSelectedTag(String s) {
+        if(s.equals(getString(R.string.todo))){
+            return R.string.todo;
+        }
+        else if(s.equals(getString(R.string.escuelas))){
+            return R.string.escuelas;
+        }else{
+            return R.string.otros;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 }

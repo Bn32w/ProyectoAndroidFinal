@@ -5,19 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.grupo.proyectofinal.Activities.MapsActivity">
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/map_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <android.support.v7.widget.AppCompatSpinner
-            android:id="@+id/map_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </android.support.v7.widget.Toolbar>
     <FrameLayout
-        android:id="@+id/map_fragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context="com.example.grupo.proyectofinal.Activities.MapsActivity" />
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/map_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/dark_header">
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/map_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </android.support.v7.widget.Toolbar>
     </FrameLayout>
     <include layout = "@layout/map_down_fragment_layout"/>
 
