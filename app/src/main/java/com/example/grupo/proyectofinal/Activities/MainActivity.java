@@ -89,6 +89,10 @@ public class MainActivity extends AppCompatActivity implements SalleLocationMana
                 Intent intent = new Intent(this,MapsActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.main_activity_login_toolbar_item:
+                Intent intent1 = new Intent(this,LoginActivity.class);
+                startActivity(intent1);
+                break;
         }
         return false;
     }

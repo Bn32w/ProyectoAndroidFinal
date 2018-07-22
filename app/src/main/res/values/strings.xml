@@ -16,6 +16,12 @@
     <string name="fp">Formacion profecional</string>
     <string name="universidad">Universidad</string>
     <string name="descripcion">Descripcion</string>
+    <string name="login_name">Username or Email</string>
+    <string name="login_pass">Password</string>
+    <string name="login">LOG IN</string>
+    <string name="register">REGISTER</string>
+    <string name="error_login">Error in login</string>
+    <string name="register_admin">Register a new admin</string>
 
     <string-array name="ciudades">
         <item>@string/Barcelona</item>

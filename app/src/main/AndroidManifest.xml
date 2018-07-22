@@ -23,7 +23,8 @@
 
         <activity android:name=".Activities.DetallesActivity" />
         <activity android:name=".Activities.MapsActivity" />
-        <activity android:name=".Activities.LoginActivity"></activity>
+        <activity android:name=".Activities.LoginActivity" />
+        <activity android:name=".Activities.RegisterScreenActivity"></activity>
     </application>
 
 </manifest>
