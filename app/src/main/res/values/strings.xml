@@ -22,6 +22,17 @@
     <string name="register">REGISTER</string>
     <string name="error_login">Error in login</string>
     <string name="register_admin">Register a new admin</string>
+    <string name="username">Username</string>
+    <string name="name">Name</string>
+    <string name="surname">Surname</string>
+    <string name="password">Password</string>
+    <string name="repeat_password">Confirm password</string>
+    <string name="not_valid_username">Not valid username</string>
+    <string name="not_valid_name">Not a valid name</string>
+    <string name="not_valid_surname">Not a valid surname</string>
+    <string name="not_valid_password">Not valid password</string>
+    <string name="password_mismatch">Password and confirmation not the same</string>
+    <string name="errorCreatingUser">Username already exists</string>
 
     <string-array name="ciudades">
         <item>@string/Barcelona</item>
